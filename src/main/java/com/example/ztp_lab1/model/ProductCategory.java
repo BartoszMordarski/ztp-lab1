@@ -1,5 +1,10 @@
 package com.example.ztp_lab1.model;
 
+import lombok.Getter;
+
+import java.math.BigDecimal;
+
+@Getter
 public enum ProductCategory {
     ELECTRONICS(50, 50000),
     BOOKS(5, 500),
@@ -13,11 +18,8 @@ public enum ProductCategory {
         this.maxPrice = maxPrice;
     }
 
-    public int getMinPrice() {
-        return minPrice;
-    }
-
-    public int getMaxPrice() {
-        return maxPrice;
+    public boolean isPriceInRange(BigDecimal price) {
+        return price.compareTo(BigDecimal.valueOf(minPrice)) >= 0 &&
+               price.compareTo(BigDecimal.valueOf(maxPrice)) <= 0;
     }
 }
