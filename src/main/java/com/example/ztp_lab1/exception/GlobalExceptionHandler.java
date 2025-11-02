@@ -1,6 +1,7 @@
 package com.example.ztp_lab1.exception;
 
 import com.example.ztp_lab1.dto.ErrorResponseDto;
+import com.example.ztp_lab1.dto.ValidationErrorResponseDto;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +38,17 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
+    @ExceptionHandler(BannedPhraseException.class)
+    public ResponseEntity<ErrorResponseDto> handleBannedPhraseException(BannedPhraseException ex) {
+
+        ErrorResponseDto error = new ErrorResponseDto(
+                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.BAD_REQUEST.getReasonPhrase(),
+                ex.getMessage()
+        );
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ErrorResponseDto> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
 
@@ -49,20 +61,19 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponseDto> handleValidationExceptions(MethodArgumentNotValidException ex) {
+    public ResponseEntity<ValidationErrorResponseDto> handleValidationExceptions(MethodArgumentNotValidException ex) {
         List<String> errors = ex.getBindingResult()
                 .getFieldErrors()
                 .stream()
                 .map(fieldError -> fieldError.getField() + ": " + fieldError.getDefaultMessage())
                 .collect(Collectors.toList());
 
-        String errorMessage = "Validation failed: " + String.join(", ", errors);
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
-                .body(new ErrorResponseDto(
+                .body(new ValidationErrorResponseDto(
                         HttpStatus.BAD_REQUEST.value(),
                         HttpStatus.BAD_REQUEST.getReasonPhrase(),
-                        errorMessage)
+                        errors)
                 );
     }
 }

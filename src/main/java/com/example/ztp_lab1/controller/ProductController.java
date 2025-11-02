@@ -1,6 +1,6 @@
 package com.example.ztp_lab1.controller;
 
-import com.example.ztp_lab1.dto.AddProductDto;
+import com.example.ztp_lab1.dto.NewProductDto;
 import com.example.ztp_lab1.dto.ProductDto;
 import com.example.ztp_lab1.model.Product;
 import com.example.ztp_lab1.service.ProductService;
@@ -29,8 +29,8 @@ public class ProductController {
 
     @GetMapping("/{id}")
     private ResponseEntity<Product> getProductById(@PathVariable Long id) {
-        Product response = productService.getProductById(id);
-        return ResponseEntity.ok(response);
+        Product product = productService.getProductById(id);
+        return ResponseEntity.ok(product);
     }
 
     @DeleteMapping("/{id}")
@@ -40,11 +40,14 @@ public class ProductController {
     }
 
     @PostMapping
-    private ResponseEntity<AddProductDto> addProduct(@Valid @RequestBody AddProductDto productDto) {
-        AddProductDto createdProduct = productService.addProduct(productDto);
+    private ResponseEntity<NewProductDto> addProduct(@Valid @RequestBody NewProductDto productDto) {
+        NewProductDto createdProduct = productService.addProduct(productDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
     }
 
-
-
+    @PutMapping("/{id}")
+    public ResponseEntity<NewProductDto> updateProduct(@PathVariable Long id, @Valid @RequestBody NewProductDto productDto) {
+        NewProductDto updatedProduct = productService.updateProduct(id, productDto);
+        return ResponseEntity.ok(updatedProduct);
+    }
 }

@@ -8,3 +8,5 @@ INSERT INTO products (name, price, quantity, category) VALUES ('Shirt', 49.99, 2
 INSERT INTO products (name, price, quantity, category) VALUES ('Jeans', 189.00, 75, 'CLOTHES');
 INSERT INTO products (name, price, quantity, category) VALUES ('Blouse', 129.99, 60, 'CLOTHES');
 INSERT INTO products (name, price, quantity, category) VALUES ('Monitor', 899.00, 20, 'ELECTRONICS');
+
+INSERT INTO banned_phrases (phrase) VALUES ('banned_phrase');

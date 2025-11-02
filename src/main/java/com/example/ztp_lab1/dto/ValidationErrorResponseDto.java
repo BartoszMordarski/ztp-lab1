@@ -1,0 +1,18 @@
+package com.example.ztp_lab1.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class ValidationErrorResponseDto {
+    private int status;
+    private String error;
+    private List<String> messages;
+}
