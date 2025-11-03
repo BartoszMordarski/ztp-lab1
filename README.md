@@ -12,7 +12,7 @@ REST API do zarządzania produktami z walidacją, historią zmian i blokowaniem 
 
 ## Jak uruchomić
 
-## 1. Sklonuj repozytorium
+### 1. Sklonuj repozytorium
 ```bash
 git clone https://github.com/BartoszMordarski/ztp-lab1.git
 cd ztp-lab1
