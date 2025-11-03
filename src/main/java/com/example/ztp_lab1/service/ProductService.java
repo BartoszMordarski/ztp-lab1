@@ -77,6 +77,7 @@ public class ProductService {
                 .build();
     }
 
+    @Transactional
     public NewProductDto updateProduct(Long id, NewProductDto newProductDto) {
         bannedPhraseValidator.validate(newProductDto.getName());
 
