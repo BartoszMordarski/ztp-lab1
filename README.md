@@ -34,7 +34,7 @@ Aplikacja dostępna na: **http://localhost:8080**
 ## Testy
 ```bash
 # Uruchom testy
-./mvnw test
+./mvnw -Dtest=CucumberTestRunner test
 
 # raport
 open target/cucumber-reports.html
